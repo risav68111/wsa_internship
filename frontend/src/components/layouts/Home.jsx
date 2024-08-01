@@ -1,28 +1,76 @@
 import React, { useEffect } from "react";
-import CountRestro from "./CountRestro.jsx";
-import Restaurant from "./Restaurant.jsx";
-import { useDispatch } from "react-redux";
-import { getRestaurants } from "../../actions/restaurantsAction.js"
+import CountRestaurant from "./CountRestaurant";
+import Restaurant from "./Restaurant";
+import {
+  getRestaurants,
+  sortByRatings,
+  sortByReviews,
+  toggleVegOnly,
+} from "../../actions/restaurantAction";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "./Loader";
+import Message from "./Message";
 
-function Home() {
-    const dispatch= useDispatch();
+export default function Home() {
+  const dispatch = useDispatch();
 
-    useEffect(()=> {
-        dispatchEvent(getRestaurants());
-    }, [dispatch]);
+  const {
+    loading: restaurantsLoading,
+    error: restaurantsError,
+    restaurants,
+    showVegOnly,
+  } = useSelector((state) => state.restaurants);
 
-    return(
+  useEffect(() => {
+    dispatch(getRestaurants());
+  }, [dispatch]);
+
+  const handleSortByReview = () => {
+    dispatch(sortByReviews());
+  };
+
+  const handleSortByRatings = () => {
+    dispatch(sortByRatings());
+  };
+  const handleToggleVegOnly = () => {
+    dispatch(toggleVegOnly());
+  };
+
+  return (
+    <>
+      <CountRestaurant />
+      {restaurantsLoading ? (
+        <Loader />
+      ) : restaurantsError ? (
+        <Message variant="danger">{restaurantsError}</Message>
+      ) : (
         <>
-            <CountRestro />
-            <section className="sort">
-                <button className="sort_veg p-3">Pure Veg</button>
-                <button className="sort_rev p-3">Sort by Review</button>
-                <button className="sort_rat p-3">Sort by Rating</button>
-            </section>
-            <Restaurant />
-            
+          <section>
+            <div className="sort">
+              <button className="sort_veg p-3" onClick={handleToggleVegOnly}>
+                {showVegOnly ? "Show All" : "Pure Veg"}
+              </button>
+              <button className="sort_rev p-3" onClick={handleSortByReview}>
+                Sort By Review
+              </button>
+              <button className="sort_rate p-3" onClick={handleSortByRatings}>
+                Sort By Ratings
+              </button>
+            </div>
+            <div className="row mt-4">
+              {restaurants ? (
+                restaurants.map((restaurant) =>
+                  !showVegOnly || (showVegOnly && restaurant.isVeg) ? (
+                    <Restaurant key={restaurant._id} restaurant={restaurant} />
+                  ) : null
+                )
+              ) : (
+                <Message variant="info">No Restaurant Found</Message>
+              )}
+            </div>
+          </section>
         </>
-    )
+      )}
+    </>
+  );
 }
-
-export default Home

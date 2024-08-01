@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
 
-function Footer() {
-    return (
-        <p className="text-center" >
-            {new Date().getFullYear() } &copy; All Right Reserved 
+export default function Footer() {
+  return (
+    <>
+      <footer>
+        <p className="text-center">
+          Food Delivery website - 2024-25. All Rights Reserved By WSA...
         </p>
-    )
+      </footer>
+    </>
+  );
 }
-
-export default Footer
