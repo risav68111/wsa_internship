@@ -21,7 +21,7 @@ export const menuReducer= (state= initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                payload: action.payload,
+                menus: action.payload,
             }
         case GET_MENU_FAIL:
             return {

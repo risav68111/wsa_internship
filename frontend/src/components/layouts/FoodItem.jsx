@@ -1,24 +1,28 @@
 import React from "react";
 import { LiaRupeeSignSolid } from "react-icons/lia";
+import { useAlert } from "react-alert";
 
-export default function FoodItem({fooditem}) {
+export default function FoodItem({ fooditem, restaurant }) {
+
+  const alert= useAlert();
+
   return (
     <div className="col-sm-12 col-md-6 col-lg-3 my-3">
       <div className="card p-3 rounded">
         <img
-          src={fooditem.images.url}
-          alt="Pizza"
+          src={fooditem.images[0].url}
+          alt={fooditem.name}
           className="card-img-top mx-auto"
         />
         {/* Heading and Description */}
         <div className="card-body d-flex flex-column">
-          <h5 className="card-title">Veg Loaded Pizza</h5>
+          <h5 className="card-title">{fooditem.name}</h5>
           <p className="fooditem_des">
-            Crunchy and Cheesy veg loaded pizza served with happiness
+             {fooditem.description}
           </p>
           <p className="card-text">
             <LiaRupeeSignSolid />
-            180
+            {fooditem.price}
             <br />
           </p>
           <button
@@ -33,9 +37,9 @@ export default function FoodItem({fooditem}) {
             Status:{" "}
             <span
               id="stock_status"
-              className={10 > 5 ? "greenColor" : "redColor"}
+              className={fooditem.stock ? "greenColor" : "redColor"}
             >
-              {10 > 5 ? "In Stock" : "Out of Stock"}
+              {fooditem.stock ? "In Stock" : "Out of Stock"}
             </span>
           </p>
         </div>

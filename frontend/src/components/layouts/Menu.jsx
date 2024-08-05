@@ -28,7 +28,10 @@ export default function Menu() {
             {menu.items && menu.items.length > 0 ? (
               <div className="row">
                 {menu.items.map((fooditem) => (
-                  <FoodItem key={fooditem._id} fooditem={fooditem} restaurant={id} />
+                  <FoodItem 
+                  key={fooditem._id} 
+                  fooditem={fooditem} 
+                  restaurant={id} />
                 ))}
               </div>
               ):(
