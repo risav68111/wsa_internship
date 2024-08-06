@@ -50,7 +50,10 @@ export const register= (userData)=> async (dispatch)=> {
         const config= {
             headers: {"Content-Type": "multipart/form-data"},
         };
-        const {data}= await axios.post(`api/v1/users/signup`, userData, config);
+        const {data}= await axios.post(
+            `api/v1/users/signup`,
+            userData, 
+            config);
 
         dispatch({
             type: REGISTER_USER_SUCCESS,
@@ -104,6 +107,5 @@ export const logout=()=> async(dispatch)=> {
   export const clearErrors= () => async(dispatch)=> {
     dispatch({
       type:CLEAR_ERROR,
-      error: null,
     })
   }

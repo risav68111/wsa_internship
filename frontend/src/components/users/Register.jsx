@@ -1,80 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { useAlert } from "react-alert";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { clearErrors } from "../../actions/userAction";
+import React, { useEffect } from "react";
+import {useState} from "react";
+import {useAlert} from "react-alert";
+import {useDispatch,useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import {clearErrors, register} from "../../actions/userAction";
 
-const register = () => {
 
-  const alert = useAlert();
-  const dispatch= useDispatch();
-  const navigate= useNavigate();
+const Register = () => {
 
- 
-  const [user, setUser]= useState({
-    name:"", 
-    email:"",
-    password:"",
-    passwordConfirm:"",
-    phoneNumber:"",
-  });
-  const {name, email, password, passwordConfirm, phoneNumber}= user;
+const alert=useAlert();
+const dispatch=useDispatch();
+const navigate=useNavigate();
+const [user,setUser]=useState({
+  name:"",
+  email:"",
+  password:"",
+  passwordConfirm:"",
+  phoneNumber:"",
+});
+const {name,email,password,passwordConfirm,phoneNumber}=user;
 
-  const [avtar, setAvatar]= useState("");
-  const [avatarPreview, setAvatarPreview]= useState("/images/images.png");
+const [avatar,setAvatar]=useState("");
+const [avatarPreview,setAvatarPreview]=useState("/images/images.png");
 
-  const {isAuthenticated, error, loading}= useSelector((state)=> state.auth);
-  
-  // handle redirection with useEffect
-  useEffect(() => {
-    if(isAuthenticated) {
-      navigate("/");
-    }
-    
-    if(error) {
-      alert.error(error);
-      dispatch(clearErrors());
-    }
-  }, [dispatch, alert, isAuthenticated, error, navigate]);
-
-  const submitHander= (e) => {
-    e.preventDefault();
-
-    if(password!= passwordConfirm ) {
-      alert.error("password dont match");
-      return ;
-    }
-
-    const formData= new FormData();
-    formData.set("name", name);
-    formData.set("email", email);
-    formData.set("password", password);
-    formData.set("passwordConfirm", passwordConfirm);
-    formData.set("phoneNumber", phoneNumber);
-    if(avatar==="") {
-      formData.set("avatar", "images/images.png");
-    } else {
-      formData.set("avatar", avatar);
-    }
-
-    dispatch(register(formData));
-
-    const onChange= () => {
-      if(e.target.name=== 'avatar') {
-        const reader= new FileReader();
-        reader.onload=()=> {
-          if(reader.DONE.readyState===2 ) {
-            setAvatarPreview(reader.result);
-            setAvatar(reader.result);
-          }
-        }
-        reader.readAsDataURL(e.target.files[0]);
-      } else {
-        setUser({ ...user, [e.target.name]: e.target.value});
-      }
-    }
-
+const {isAuthenticated,error,loading}=useSelector(
+  (state)=>state.auth
+);
+useEffect(()=>{
+  if(isAuthenticated){
+    navigate("/")
   }
+  if(error){
+    alert.error(error);
+    dispatch(clearErrors())
+  }
+},[dispatch,alert,isAuthenticated,error,navigate]);
+
+const submitHandler=(e)=>{
+  e.preventDefault();
+  if(password!==passwordConfirm){
+    alert.error("Password dont matched");
+    return;
+  }
+  const formData =new FormData();
+  formData.set("name",name);
+  formData.set("email",email);
+  formData.set("password",password);
+  formData.set("passwordConfirm",passwordConfirm);
+  formData.set("phoneNumber",phoneNumber);
+  if(avatar===""){
+    formData.set("avatar","/images/images.png");
+  }else{
+    formData.set("avatar",avatar);
+  }
+  dispatch(register(formData));
+  
+};
+const onChange=(e)=>{
+  if(e.target.name==="avatar"){
+    const reader = new FileReader();
+    reader.onload=()=>{
+      if(reader.readyState===2){
+        setAvatarPreview(reader.result);
+        setAvatar(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }else{
+    setUser({...user,[e.target.name]:e.target.value});
+  }
+};
+
 
   return (
     <>
@@ -180,4 +176,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

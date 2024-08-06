@@ -12,6 +12,7 @@ export default function Header() {
 
   const logoutHandler=()  => {
     dispatch(logout());
+    alert.success("Logout Successfully.")
   }
 
   return (
@@ -40,9 +41,10 @@ export default function Header() {
                 className="btn dropdown-toggle text-white mr-4" 
                 type="button"
                 id="dropDownMenuButton"
+                data-toggle="dropdown"
                 aria-haspopup= 'true'
                 aria-expanded="false">
-              
+
                 <figure className="avatar avatar-nav">
                   <img
                     src="/images/images.png"
@@ -52,8 +54,12 @@ export default function Header() {
                 </figure>
                 <span > {user && user.name} </span>
               </Link>
-              <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
-                <Link className="dropdown-item" to="/eats/orders/me/myOrders">
+              <div 
+              className="dropdown-menu" 
+              aria-labelledby="dropDownMenuButton">
+                <Link 
+                className="dropdown-item" 
+                to="/eats/orders/me/myOrders">
                 Orders
                 </Link>
                 <Link className="dropdown-item" to="/users/me">
