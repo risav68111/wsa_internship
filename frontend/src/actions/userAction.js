@@ -24,7 +24,7 @@ export const login = (email, password) => async(dispatch) => {
             },
         };
         const {data}= await axios.post(
-            `api/v1/users/login`, 
+            `/api/v1/users/login`, 
             {email, password}, 
             config
         );
@@ -51,7 +51,7 @@ export const register= (userData)=> async (dispatch)=> {
             headers: {"Content-Type": "multipart/form-data"},
         };
         const {data}= await axios.post(
-            `api/v1/users/signup`,
+            `/api/v1/users/signup`,
             userData, 
             config);
 
