@@ -20,7 +20,7 @@ export default function Header() {
       {/* logo */}
       <div className="col-12 col-md-3">
         <Link to="/">
-          <img sr c="/images/logo.webp" alt="logo" className="logo" />
+          <img src="/images/logo.webp" alt="logo" className="logo" />
         </Link>
       </div>
       {/* Serach Bar and Search Icon */}
@@ -47,7 +47,7 @@ export default function Header() {
 
                 <figure className="avatar avatar-nav">
                   <img
-                    src="/images/images.png"
+                    src={user.avatar.url}
                     alt="avatar"
                     className="rounded-circle"
                   />
