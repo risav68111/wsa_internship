@@ -9,7 +9,7 @@ import { UPDATE_PROFILE_RESET } from "../../constants/userConstant";
 const UpdateProfile= () => {
 
   const [name, setName]= useState("")
-  const [email, setemail]= useState("");
+  const [email, setEmail]= useState("");
   const [avatar, setAvatar]= useState("");
   const [avatarPreview, setAvatarPreview]= useState("/images/images.png");
  
@@ -19,12 +19,12 @@ const UpdateProfile= () => {
   const navigate= useNavigate();
   
   const {user}= useSelector((state)=> state.auth);
-  const {error, isUpdated, loading}= useSelector((state)=> state.user)
+  const {error, isUpdated, loading}= useSelector((state)=> state.user);
   
   useEffect(()=> {
     if(user) {
       setName(user.name);
-      setemail(user.email);
+      setEmail(user.email);
       setAvatarPreview(user.avatar.url);
     }
     if(error) {
@@ -48,7 +48,7 @@ const UpdateProfile= () => {
     formData.set("name", name);
     formData.set("avatar", avatar);
     
-    dispatch(updateProfile());
+    dispatch(updateProfile(formData));
   }
 
   const onChange=(e)=> {
@@ -90,7 +90,7 @@ const UpdateProfile= () => {
                 className="form-control"
                 name="email"
                 value={email}
-                onChange={(e)=> setemail(e.target.value)}
+                onChange={(e)=> setEmail(e.target.value)}
               ></input>
             </div>
 
