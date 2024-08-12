@@ -183,7 +183,7 @@ export const forgotPassword= (email)=> async(dispatch) => {
             headers: { "Content-Type": "application/json", },
         };
         const {data} =await axios.post(
-            `/api/v1/users/forgetPassword`,
+            "/api/v1/users/forgetPassword",
             email,
             config
         );
