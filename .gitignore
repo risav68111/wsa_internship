@@ -1,1 +1,2 @@
-Backend-obfuscated/config/config.env
+/Backend-obfuscated/config/config.env
+/Backend-obfuscated/node_modules
