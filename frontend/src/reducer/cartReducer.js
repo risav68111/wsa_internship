@@ -23,7 +23,7 @@ export const  cartReducer= (state={cartItems:[], restaurant: {} },
         case FETCH_CART: 
             return {
                 ...state,
-                restaurant: action.payload.restaurant.ADD_TO_CART,
+                restaurant: action.payload.restaurant,
                 cartItems: action.payload.items,
             }
         case REMOVE_ITEM_CART:

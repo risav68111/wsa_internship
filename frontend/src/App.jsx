@@ -36,7 +36,7 @@ export default function App() {
             <Route path="/users/me/update" element={<UpdateProfile />} />
             <Route path="/users/forgotPassword" element={ <ForgotPassword />} />
             <Route path="/users/resetPassword/:token" element={<NewPassword />} />
-            <Route path="/carts" element={<Cart/>} />
+            <Route path="/cart" element={<Cart/>} />
           </Routes>
           {/* <Home /> */}
           {/* <Menu />

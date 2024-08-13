@@ -43,7 +43,6 @@ export default function FoodItem({ fooditem, restaurant }) {
       setQuantity(newQuantity);
       dispatch(updateCartQuantity(fooditem._id, newQuantity, alert));
     } else {
-      
       alert.error("Exceed Stock Limit!!!!");
     }
   }
@@ -54,8 +53,8 @@ export default function FoodItem({ fooditem, restaurant }) {
       setQuantity(newQuantity);
       dispatch(updateCartQuantity(fooditem._id, newQuantity, alert));
     } else {
-      setQuantity(0)
-      setShowButtons(false)
+      setQuantity(0);
+      setShowButtons(false);
       dispatch(removeItemFromCart(fooditem._id));
     }
   }
@@ -114,7 +113,6 @@ export default function FoodItem({ fooditem, restaurant }) {
                 <span className="btn btn-primary plus" onClick={increaseQty}>
                   +
                 </span>
-
               </div>
             )
           }

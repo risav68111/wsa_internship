@@ -55,7 +55,7 @@ export const updateCartQuantity=
         }
         const response= await axios.post("/api/v1/eats/cart/update-cart-item", {
             userId: user._id,
-            foodItem: foodItemId,
+            foodItemId: foodItemId,
             quantity,
         });
         dispatch({
