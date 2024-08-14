@@ -1,4 +1,5 @@
 
+import { CLEAR_CART } from "../constants/cartConstant";
 import {CLEAR_ERROR, 
         LOAD_USER_REQUSET, 
         LOAD_USER_SUCCESS, 
@@ -133,6 +134,7 @@ export const logout=()=> async(dispatch)=> {
       dispatch({
         type: LOGOUT_SUCCESS,
       });
+      dispatch({type: CLEAR_CART});
     } catch(error) {
       dispatch({
         type:LOGOUT_FAIL,
@@ -145,7 +147,7 @@ export const logout=()=> async(dispatch)=> {
   // clear error
   export const clearErrors= () => async(dispatch)=> {
     dispatch({
-      type:CLEAR_ERROR,
+      typeD:CLEAR_ERROR,
     })
   }
 

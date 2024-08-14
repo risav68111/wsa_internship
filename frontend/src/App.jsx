@@ -14,13 +14,22 @@ import NewPassword from "./components/users/NewPassword";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
 import Cart from "./components/cart/Cart";
+import {useDispatch, useSelector } from "react-redux";
+import { fetchCartItems } from "./actions/cartAction";
 
 export default function App() {
 
   console.log(store);
   useEffect(()=> {
     store.dispatch(loadUser())
-  },[])
+  },[]);
+
+  const dispatch= useDispatch();
+
+  const {user}= useSelector((state) => state.auth);
+  if(user) {
+    dispatch(fetchCartItems());
+  }
 
   return (
     <BrowserRouter>
