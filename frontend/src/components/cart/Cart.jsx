@@ -7,6 +7,9 @@ import {
   removeItemFromCart,
   updateCartQuantity,
 } from "../../actions/cartAction";
+import {
+  payment
+} from "../../actions/orderAction"
 
 // let fakeCartItems = [
 //   {
@@ -72,6 +75,10 @@ const Cart = () => {
     } else {
       alert.error("Minimum Quantity Reached.")
     }
+  }
+
+  const checkoutHandler =() => {
+    dispatch(payment(cartItems, restaurant));
   }
 
   return (
@@ -161,7 +168,11 @@ const Cart = () => {
                   </span>
                 </p>
                 <hr />
-                <button id="checkout_btn" className="btn btn-primary btn-block">
+                <button 
+                  id="checkout_btn" 
+                  className="btn btn-primary btn-block" 
+                  onClick={checkoutHandler} 
+                >
                   Check Out
                 </button>
               </div>

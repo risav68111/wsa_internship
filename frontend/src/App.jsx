@@ -14,8 +14,11 @@ import NewPassword from "./components/users/NewPassword";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
 import Cart from "./components/cart/Cart";
-import {useDispatch, useSelector } from "react-redux";
-import { fetchCartItems } from "./actions/cartAction";
+import OrderSuccess from "./components/cart/OrderSuccess";
+import ListOrders from "./components/order/ListOrders";
+import OrderDetails from "./components/order/OrderDetails";
+// import {useDispatch, useSelector } from "react-redux";
+// import { fetchCartItems } from "./actions/cartAction";
 
 export default function App() {
 
@@ -24,12 +27,12 @@ export default function App() {
     store.dispatch(loadUser())
   },[]);
 
-  const dispatch= useDispatch();
+  // const dispatch= useDispatch();
 
-  const {user}= useSelector((state) => state.auth);
-  if(user) {
-    dispatch(fetchCartItems());
-  }
+  // const {user}= useSelector((state) => state.auth);
+  // if(user) {
+  //   dispatch(fetchCartItems());
+  // }
 
   return (
     <BrowserRouter>
@@ -46,6 +49,10 @@ export default function App() {
             <Route path="/users/forgotPassword" element={ <ForgotPassword />} />
             <Route path="/users/resetPassword/:token" element={<NewPassword />} />
             <Route path="/cart" element={<Cart/>} />
+            <Route path="/success" element={<OrderSuccess />} />
+            <Route path="/eats/orders/me/myOrders" element={<ListOrders />} />
+            <Route path="/eats/orders/:id" element={< OrderDetails />} />
+            <Route path="*" element={<h1> Page Doesn't Exist.  </h1>} />
           </Routes>
           {/* <Home /> */}
           {/* <Menu />

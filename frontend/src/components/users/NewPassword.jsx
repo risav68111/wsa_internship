@@ -30,7 +30,7 @@ const NewPassword = () => {
     formData.set("password", password);
     formData.set("passwordConfirm", passwordConfirm);
 
-    dispatch(resetPassword(formData));
+    dispatch(resetPassword(token, formData));
   }
 
 
