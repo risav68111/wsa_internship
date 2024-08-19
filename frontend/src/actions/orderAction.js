@@ -83,7 +83,7 @@ export const myOrders =() => async (dispatch) => {
         dispatch({
             type: MY_ORDER_FAIL,
             payload: error.response.data.message,
-        })
+        });
     }
 }
 
